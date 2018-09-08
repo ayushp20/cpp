@@ -34,24 +34,41 @@ int main(){
 
 
     while(t--){
-        int n;
+        int n,odds = 0, evens = 0;
         cin>>n;
-        vector<int> even, odd;
+        vector<int> arr(n);
+        map<int,int> mp;
         for(int i = 0; i < n; i++){
             int tmp;
             cin>>tmp;
+            mp[tmp]++;
+            arr[i] = tmp;
             if(tmp&1)
-                odd.push_back(tmp);
+                odds++;
             else
-                even.push_back(tmp);
+                evens++;
         }
 
         ull cnt = 0;
 
-        for(int i = 0; i < even.size(); i++ )
-            if()
+        for(int i = 0; i < n-1; i++){
+            if(arr[i]&1)odds--;
+            else evens--;
+            mp[arr[i]]--;
 
+            if(arr[i]&1)
+                cnt+=odds - mp[arr[i]];
+            else
+                cnt+=evens- mp[arr[i]];
+
+            if((arr[i]&2) == 2)
+                cnt -= mp[arr[i]-2];
+            else
+                cnt -= mp[arr[i]+2];
         }
+
+
+
         cout<<cnt<<endl;
     }
 
